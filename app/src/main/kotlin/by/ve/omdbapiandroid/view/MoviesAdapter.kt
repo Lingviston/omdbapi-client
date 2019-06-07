@@ -1,31 +1,29 @@
 package by.ve.omdbapiandroid.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import by.ve.omdbapiandroid.R
+import by.ve.omdbapiandroid.databinding.ItemMovieBinding
 
 class MoviesAdapter : PagedListAdapter<MovieAdapterItem, MoviesAdapter.ViewHolder>(MovieAdapterItem.diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return ViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemMovieBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bindTo(item)
+        holder.item = getItem(position)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val titleView: TextView = view.findViewById(R.id.title)
-
-        fun bindTo(item: MovieAdapterItem?) {
-            titleView.text = item?.title ?: "Placeholder"
+        var item: MovieAdapterItem? = null
+        set(value) {
+            field = value
+            binding.item = item
         }
     }
 }
