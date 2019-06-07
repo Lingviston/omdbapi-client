@@ -22,11 +22,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:adapter="@{adapter}"
+            app:itemSpacing="@{@dimen/spacing_8}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:spanCount="3" />
+            app:spanCount="@integer/movies_list_columns_count" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
