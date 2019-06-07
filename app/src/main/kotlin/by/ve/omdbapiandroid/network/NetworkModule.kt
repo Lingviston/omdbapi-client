@@ -28,7 +28,8 @@ class NetworkModule {
         OkHttpClient.Builder().addInterceptor(apiKeyAddingInterceptor).build()
 
     @Provides
-    fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
+    fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
+        RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
 
     @Provides
     @Singleton

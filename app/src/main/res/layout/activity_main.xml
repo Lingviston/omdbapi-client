@@ -5,8 +5,12 @@
     <data>
 
         <variable
+            name="adapter"
+            type="by.ve.omdbapiandroid.view.MoviesAdapter" />
+
+        <variable
             name="viewModel"
-            type="by.ve.omdbapiandroid.presentation.MainViewModel" />
+            type="by.ve.omdbapiandroid.presentation.MoviesListViewModel" />
     </data>
 
 
@@ -17,9 +21,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

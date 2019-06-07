@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SearchResponseJson(
+data class MoviesPageJson(
     @Json(name = "Search") val results: List<MovieJson>,
     @Json(name = "totalResults") val totalCount: Int
 )
