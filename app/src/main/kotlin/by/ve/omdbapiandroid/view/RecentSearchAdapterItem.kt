@@ -3,7 +3,7 @@ package by.ve.omdbapiandroid.view
 import androidx.recyclerview.widget.DiffUtil
 
 
-class RecentSearchAdapterItem(val uid: Long, val query: String, private val onClick: (String) -> Unit) {
+class RecentSearchAdapterItem(val query: String, private val onClick: (String) -> Unit) {
 
     fun onClick() {
         onClick.invoke(query)
@@ -14,12 +14,12 @@ class RecentSearchAdapterItem(val uid: Long, val query: String, private val onCl
         val diffCallback = object : DiffUtil.ItemCallback<RecentSearchAdapterItem>() {
 
             override fun areItemsTheSame(oldItem: RecentSearchAdapterItem, newItem: RecentSearchAdapterItem): Boolean =
-                oldItem.uid == newItem.uid
+                oldItem.query == newItem.query
 
             override fun areContentsTheSame(
                 oldItem: RecentSearchAdapterItem,
                 newItem: RecentSearchAdapterItem
-            ): Boolean = areItemsTheSame(oldItem, newItem) && oldItem.query == newItem.query
+            ): Boolean = areItemsTheSame(oldItem, newItem)
         }
     }
 }

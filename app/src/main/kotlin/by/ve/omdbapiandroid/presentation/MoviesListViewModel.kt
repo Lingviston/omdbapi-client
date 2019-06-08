@@ -50,8 +50,7 @@ class MoviesListViewModel @Inject constructor(
 
         recentSearches = LivePagedListBuilder<Int, RecentSearchAdapterItem>(recentSearchesDataSourceFactory.map {
             RecentSearchAdapterItem(
-                uid = it.uid,
-                query = it.params.query,
+                query = it.query,
                 onClick = ::onRecentQuerySelected
             )
         }, 10).build()

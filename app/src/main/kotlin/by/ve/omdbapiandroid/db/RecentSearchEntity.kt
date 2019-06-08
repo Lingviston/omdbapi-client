@@ -2,11 +2,10 @@ package by.ve.omdbapiandroid.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "RecentSearches")
+@Entity(tableName = "RecentSearches", primaryKeys = ["query"])
 data class RecentSearchEntity(
-    @PrimaryKey(autoGenerate = true) val uid: Long? = null,
-    @ColumnInfo(name = "query") val query: String
+    @ColumnInfo(name = "query") val query: String,
+    @ColumnInfo(name = "timestamp") val timestamp: Long
 )

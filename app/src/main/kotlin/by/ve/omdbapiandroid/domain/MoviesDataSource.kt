@@ -4,7 +4,7 @@ import androidx.paging.PositionalDataSource
 import by.ve.omdbapiandroid.repositories.MoviesRepository
 import by.ve.omdbapiandroid.repositories.RecentSearchesRepository
 import by.ve.omdbapiandroid.repositories.model.MovieDto
-import by.ve.omdbapiandroid.repositories.model.RecentSearchParamsDto
+import by.ve.omdbapiandroid.repositories.model.RecentSearchDto
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
@@ -21,7 +21,7 @@ class MoviesDataSource(
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<MovieDto>) {
         compositeDisposable += moviesRepository.findMovies(query, INITIAL_PAGE_NUMBER)
-            .doOnSubscribe { recentSearchesRepository.addRecentSearch(RecentSearchParamsDto(query = query)) }
+            .doOnSubscribe { recentSearchesRepository.addRecentSearch(RecentSearchDto(query = query)) }
             .subscribeBy(
                 onSuccess = { callback.onResult(it.movies, 0, it.totalCount) },
                 onError = { callback.onResult(emptyList(), 0, 0) }
