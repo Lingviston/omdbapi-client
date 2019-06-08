@@ -43,7 +43,7 @@ fun SearchView.onQueryChanged(onQueryChange: BindingAction<String>?, onQuerySubm
     setOnQueryTextListener(object : SearchView.OnQueryTextListener{
         override fun onQueryTextSubmit(query: String): Boolean {
             onQuerySubmit?.invoke(query)
-            return true
+            return false
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
