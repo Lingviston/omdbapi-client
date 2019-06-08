@@ -25,7 +25,7 @@ class MoviesDataSource(
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<MovieDto>) {
         compositeDisposable += moviesRepository.findMovies(query, params.pageNumber).subscribeBy(
-            onSuccess = { callback.onResult(if (params.startPosition >= it.totalCount) emptyList() else it.movies) },
+            onSuccess = { callback.onResult(it.movies) },
             onError = { callback.onResult(emptyList()) }
         )
     }

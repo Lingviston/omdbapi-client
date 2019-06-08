@@ -30,7 +30,7 @@ class MoviesListViewModel @Inject constructor(
 
         val moviesListConfig = PagedList.Config.Builder()
             .setPageSize(10)
-            .setEnablePlaceholders(false)
+            .setEnablePlaceholders(true)
             .build()
 
         movies = LivePagedListBuilder<Int, MovieAdapterItem>(moviesDataSourceFactory.map {

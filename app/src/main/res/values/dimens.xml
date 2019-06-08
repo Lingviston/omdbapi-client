@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="spacing_8">8dp</dimen>
+
     <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_height">100dp</dimen>
 </resources>
