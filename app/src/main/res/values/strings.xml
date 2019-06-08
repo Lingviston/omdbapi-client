@@ -2,5 +2,11 @@
     <string name="app_name">Omdbapi Android</string>
 
     <string name="recent_searches">Recent Searches</string>
+    <string name="filter">Filter</string>
     <string name="search_hint">Enter a movie title</string>
+    <string name="filter_year">Filter by year</string>
+    <string name="type_series">Series</string>
+    <string name="type_movie">Movie</string>
+    <string name="type_episode">Episode</string>
+    <string name="apply_filter">Apply Filter</string>
 </resources>

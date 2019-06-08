@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import by.ve.omdbapiandroid.databinding.ItemRecentSearchBinding
 
 
-class RecentSearchesAdapter :
-    PagedListAdapter<RecentSearchAdapterItem, RecentSearchesAdapter.ViewHolder>(RecentSearchAdapterItem.diffCallback) {
+class SearchQueriesAdapter :
+    PagedListAdapter<SearchQueryAdapterItem, SearchQueriesAdapter.ViewHolder>(SearchQueryAdapterItem.diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -17,12 +17,12 @@ class RecentSearchesAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.item = getItem(position)
+        holder.itemQuery = getItem(position)
     }
 
     class ViewHolder(private val binding: ItemRecentSearchBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        var item: RecentSearchAdapterItem? = null
+        var itemQuery: SearchQueryAdapterItem? = null
             set(value) {
                 field = value
                 binding.item = value

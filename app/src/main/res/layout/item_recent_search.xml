@@ -6,12 +6,27 @@
 
         <variable
             name="item"
-            type="by.ve.omdbapiandroid.view.RecentSearchAdapterItem" />
+            type="by.ve.omdbapiandroid.view.SearchQueryAdapterItem" />
     </data>
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@{item.query}"
-        app:onClick="@{item::onClick}" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.query}"
+            app:onClick="@{item::onClick}"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.year}"
+            app:onClick="@{item::onClick}"
+            app:layout_constraintTop_toBottomOf="@id/title"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

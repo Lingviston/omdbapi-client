@@ -7,7 +7,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface MainActivityModule {
 
-    @ContributesAndroidInjector(modules = [MainActivityProviderModule::class])
+    @ContributesAndroidInjector(modules = [MainActivityProviderModule::class, FilterFragmentModule::class])
     fun contributeMainActivity(): MainActivity
 }
 
@@ -18,5 +18,5 @@ class MainActivityProviderModule {
     fun provideMoviesAdapter() = MoviesAdapter()
 
     @Provides
-    fun provideRecentSearchesAdapter() = RecentSearchesAdapter()
+    fun provideRecentSearchesAdapter() = SearchQueriesAdapter()
 }

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="recentSearchesAdapter"
-            type="by.ve.omdbapiandroid.view.RecentSearchesAdapter" />
+            name="searchQueriesAdapter"
+            type="by.ve.omdbapiandroid.view.SearchQueriesAdapter" />
 
         <variable
             name="moviesAdapter"
@@ -27,7 +27,7 @@
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:adapter="@{recentSearchesAdapter}"
+            app:adapter="@{searchQueriesAdapter}"
             app:itemSpacing="@{@dimen/spacing_8}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_recent_search" />
@@ -47,6 +47,7 @@
                     android:layout_gravity="top"
                     android:layout_margin="@dimen/spacing_8"
                     android:background="@drawable/bg_search_view"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
                     app:navigationIcon="@drawable/ic_recent_searches"
                     app:onNavigationClick="@{viewModel::onRecentSearchesClick}">
 
@@ -54,7 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:iconifiedByDefault="false"
-                        app:onQueryChange="@{viewModel::onSearchQueryChange}"
+                        app:onQuerySubmit="@{viewModel::onSearchQuerySubmit}"
                         app:query="@{viewModel.query}"
                         app:queryBackground="@null"
                         app:queryHint="@string/search_hint"
@@ -71,6 +72,15 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:spanCount="@integer/movies_list_columns_count"
                 tools:listitem="@layout/item_movie" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/spacing_16"
+                android:src="@drawable/ic_filter"
+                app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+                app:onClick="@{viewModel::onShowFilterClick}" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 </layout>

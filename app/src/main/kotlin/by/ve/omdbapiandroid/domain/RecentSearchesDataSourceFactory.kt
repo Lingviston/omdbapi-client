@@ -1,14 +1,14 @@
 package by.ve.omdbapiandroid.domain
 
 import androidx.paging.DataSource
-import by.ve.omdbapiandroid.repositories.RecentSearchesRepository
-import by.ve.omdbapiandroid.repositories.model.RecentSearchDto
+import by.ve.omdbapiandroid.repositories.SearchQueriesRepository
+import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
 
 
-class RecentSearchesDataSourceFactory(recentSearchesRepository: RecentSearchesRepository) :
-    DataSource.Factory<Int, RecentSearchDto>() {
+class RecentSearchesDataSourceFactory(searchQueriesRepository: SearchQueriesRepository) :
+    DataSource.Factory<Int, SearchQueryDto>() {
 
-    private val recentSearchesDtoFactory = recentSearchesRepository.getAllRecentSearchesListFactory()
+    private val recentSearchesDtoFactory = searchQueriesRepository.getAllSearchQueriesListFactory()
 
-    override fun create(): DataSource<Int, RecentSearchDto> = recentSearchesDtoFactory.create()
+    override fun create(): DataSource<Int, SearchQueryDto> = recentSearchesDtoFactory.create()
 }

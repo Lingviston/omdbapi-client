@@ -6,17 +6,17 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-private const val RECENT_SEARCHES_DB_FILE_NAME = "recent_searches.db"
+private const val RECENT_SEARCHES_DB_FILE_NAME = "search_queries.db"
 
 @Module
 class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideRecentSearchesDatabase(application: Application) =
-        Room.databaseBuilder(application, RecentSearchesDatabase::class.java, RECENT_SEARCHES_DB_FILE_NAME).build()
+    fun provideSearchQueriesDatabase(application: Application) =
+        Room.databaseBuilder(application, SearchQueriesDatabase::class.java, RECENT_SEARCHES_DB_FILE_NAME).build()
 
     @Provides
     @Singleton
-    fun provideRecentSearchesDao(database: RecentSearchesDatabase) = database.getRecentSearchesDao()
+    fun provideSearchQueriesDao(database: SearchQueriesDatabase) = database.getRecentQueriesDao()
 }

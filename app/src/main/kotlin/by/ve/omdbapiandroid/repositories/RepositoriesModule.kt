@@ -1,6 +1,6 @@
 package by.ve.omdbapiandroid.repositories
 
-import by.ve.omdbapiandroid.db.RecentSearchesDao
+import by.ve.omdbapiandroid.db.SearchQueriesDao
 import by.ve.omdbapiandroid.network.SearchService
 import by.ve.omdbapiandroid.repositories.model.SearchResultsMapper
 import by.ve.omdbapiandroid.repositories.model.SearchResultsMapperImpl
@@ -23,6 +23,6 @@ class RepositoriesModule {
 
     @Provides
     @Singleton
-    fun provideRecentSearchesRepository(recentSearchesDao: RecentSearchesDao): RecentSearchesRepository =
-        RecentSearchesRepositoryImpl(recentSearchesDao)
+    fun provideSearchQueriesRepository(searchQueriesDao: SearchQueriesDao): SearchQueriesRepository =
+        SearchQueriesRepositoryImpl(searchQueriesDao)
 }

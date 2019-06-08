@@ -10,7 +10,8 @@ interface SearchService {
     @GET(".")
     fun search(
         @Query("s") query: String,
-        @Query("page") int: Int,
+        @Query("y") year: Int?,
+        @Query("page") page: Int,
         @Query("type") type: String
     ): Single<MoviesPageJson>
 }

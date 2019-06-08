@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
-    lateinit var recentSearchesAdapter: RecentSearchesAdapter
+    lateinit var searchQueriesAdapter: SearchQueriesAdapter
 
     @Inject
     lateinit var moviesAdapter: MoviesAdapter
@@ -27,15 +27,23 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).also {
             it.lifecycleOwner = this
-            it.recentSearchesAdapter = recentSearchesAdapter
+            it.searchQueriesAdapter = searchQueriesAdapter
             it.moviesAdapter = moviesAdapter
             it.viewModel = moviesListViewModel
         }
-        moviesListViewModel.recentSearches.observe(this, Observer {
-            recentSearchesAdapter.submitList(it)
+        moviesListViewModel.searchesQuery.observe(this, Observer {
+            searchQueriesAdapter.submitList(it)
         })
         moviesListViewModel.movies.observe(this, Observer {
             moviesAdapter.submitList(it)
+        })
+        moviesListViewModel.showFilterSettings.observe(this, Observer {
+            with(supportFragmentManager) {
+                val existingFragment = findFragmentByTag(FilterDialogFragment.TAG)
+                if (existingFragment == null) {
+                    FilterDialogFragment().show(this, FilterDialogFragment.TAG)
+                }
+            }
         })
     }
 }

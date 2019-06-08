@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="by.ve.omdbapiandroid.presentation.FilterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="320dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/yearSelectorCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/yearSelector"
+            android:text="@string/filter_year"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/yearSelector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:onItemSelected="@{viewModel::onSelectedYearIndexChanged}"
+            app:entries="@{viewModel.years}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/yearSelectorCaption"
+            app:selectedPosition="@{viewModel.selectedYearPosition}" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/typesSelector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/yearSelector">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type_movie" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type_series" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type_episode" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_filter"
+            app:onClick="@{viewModel::onApplyFilterPressed}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/typesSelector" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

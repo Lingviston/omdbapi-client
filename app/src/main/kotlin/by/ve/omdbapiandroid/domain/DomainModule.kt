@@ -1,7 +1,7 @@
 package by.ve.omdbapiandroid.domain
 
 import by.ve.omdbapiandroid.repositories.MoviesRepository
-import by.ve.omdbapiandroid.repositories.RecentSearchesRepository
+import by.ve.omdbapiandroid.repositories.SearchQueriesRepository
 import dagger.Module
 import dagger.Provides
 
@@ -11,11 +11,11 @@ class DomainModule {
     @Provides
     fun provideMoviesDataSourceFactory(
         moviesRepository: MoviesRepository,
-        recentSearchesRepository: RecentSearchesRepository
-    ): MoviesDataSourceFactory = MoviesDataSourceFactory(moviesRepository, recentSearchesRepository)
+        searchQueriesRepository: SearchQueriesRepository
+    ): MoviesDataSourceFactory = MoviesDataSourceFactory(moviesRepository, searchQueriesRepository)
 
     @Provides
     fun provideRecentSearchesDataSourceFactory(
-        recentSearchesRepository: RecentSearchesRepository
-    ): RecentSearchesDataSourceFactory = RecentSearchesDataSourceFactory(recentSearchesRepository)
+        searchQueriesRepository: SearchQueriesRepository
+    ): RecentSearchesDataSourceFactory = RecentSearchesDataSourceFactory(searchQueriesRepository)
 }

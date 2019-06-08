@@ -7,11 +7,11 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface RecentSearchesDao {
+interface SearchQueriesDao {
 
-    @Query("SELECT * from RecentSearches ORDER BY timestamp DESC")
-    fun getAll(): DataSource.Factory<Int, RecentSearchEntity>
+    @Query("SELECT * from SearchQueries ORDER BY timestamp DESC")
+    fun getAll(): DataSource.Factory<Int, SearchQueryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addRecentSearch(recentSearchEntity: RecentSearchEntity)
+    fun addRecentSearch(searchQueryEntity: SearchQueryEntity)
 }
