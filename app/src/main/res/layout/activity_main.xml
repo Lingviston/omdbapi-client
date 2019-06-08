@@ -6,7 +6,11 @@
     <data>
 
         <variable
-            name="adapter"
+            name="recentSearchesAdapter"
+            type="by.ve.omdbapiandroid.view.RecentSearchesAdapter" />
+
+        <variable
+            name="moviesAdapter"
             type="by.ve.omdbapiandroid.view.MoviesAdapter" />
 
         <variable
@@ -14,44 +18,59 @@
             type="by.ve.omdbapiandroid.presentation.MoviesListViewModel" />
     </data>
 
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.slidingpanelayout.widget.SlidingPaneLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="top"
-                android:layout_margin="@dimen/spacing_8"
-                android:background="@drawable/bg_search_view"
-                app:menu="@menu/menu_search">
-
-                <androidx.appcompat.widget.SearchView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:iconifiedByDefault="false"
-                    app:onQueryChange="@{viewModel::onSearchQueryChange}"
-                    app:query="@{viewModel.query}"
-                    app:queryHint="@string/search_hint"
-                    app:searchIcon="@null"
-                    app:queryBackground="@null"/>
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="match_parent"
+        app:open="@={viewModel.recentSearchesOpen}">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
-            app:adapter="@{adapter}"
+            android:orientation="vertical"
+            app:adapter="@{recentSearchesAdapter}"
             app:itemSpacing="@{@dimen/spacing_8}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:spanCount="@integer/movies_list_columns_count"
-            tools:listitem="@layout/item_movie" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_recent_search" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="top"
+                    android:layout_margin="@dimen/spacing_8"
+                    android:background="@drawable/bg_search_view"
+                    app:navigationIcon="@drawable/ic_recent_searches"
+                    app:onNavigationClick="@{viewModel::onRecentSearchesClick}">
+
+                    <androidx.appcompat.widget.SearchView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:iconifiedByDefault="false"
+                        app:onQueryChange="@{viewModel::onSearchQueryChange}"
+                        app:query="@{viewModel.query}"
+                        app:queryBackground="@null"
+                        app:queryHint="@string/search_hint"
+                        app:searchIcon="@null" />
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:adapter="@{moviesAdapter}"
+                app:itemSpacing="@{@dimen/spacing_8}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:spanCount="@integer/movies_list_columns_count"
+                tools:listitem="@layout/item_movie" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 </layout>

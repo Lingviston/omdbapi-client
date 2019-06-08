@@ -50,7 +50,7 @@ class MoviesAdapter : PagedListAdapter<MovieAdapterItem, MoviesAdapter.ViewHolde
             var item: MovieAdapterItem? = null
                 set(value) {
                     field = value
-                    binding.item = item
+                    binding.item = value
                 }
         }
 

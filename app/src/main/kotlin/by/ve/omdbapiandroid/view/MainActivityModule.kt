@@ -16,4 +16,7 @@ class MainActivityProviderModule {
 
     @Provides
     fun provideMoviesAdapter() = MoviesAdapter()
+
+    @Provides
+    fun provideRecentSearchesAdapter() = RecentSearchesAdapter()
 }

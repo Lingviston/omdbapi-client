@@ -1,6 +1,7 @@
 package by.ve.omdbapiandroid.application
 
 import android.app.Application
+import by.ve.omdbapiandroid.db.DatabaseModule
 import by.ve.omdbapiandroid.domain.DomainModule
 import by.ve.omdbapiandroid.network.NetworkModule
 import by.ve.omdbapiandroid.parsing.ParsingModule
@@ -20,7 +21,8 @@ import javax.inject.Singleton
         NetworkModule::class,
         MainActivityModule::class,
         RepositoriesModule::class,
-        DomainModule::class
+        DomainModule::class,
+        DatabaseModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<OmdbapiApplication> {

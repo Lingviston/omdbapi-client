@@ -13,6 +13,9 @@ import javax.inject.Inject
 class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
+    lateinit var recentSearchesAdapter: RecentSearchesAdapter
+
+    @Inject
     lateinit var moviesAdapter: MoviesAdapter
 
     @Inject
@@ -24,9 +27,13 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).also {
             it.lifecycleOwner = this
-            it.adapter = moviesAdapter
+            it.recentSearchesAdapter = recentSearchesAdapter
+            it.moviesAdapter = moviesAdapter
             it.viewModel = moviesListViewModel
         }
+        moviesListViewModel.recentSearches.observe(this, Observer {
+            recentSearchesAdapter.submitList(it)
+        })
         moviesListViewModel.movies.observe(this, Observer {
             moviesAdapter.submitList(it)
         })

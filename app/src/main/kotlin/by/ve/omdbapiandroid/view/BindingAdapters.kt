@@ -1,11 +1,21 @@
 package by.ve.omdbapiandroid.view
 
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.bumptech.glide.Glide
+
+@BindingAdapter(value = ["onClick"])
+fun View.onClick(onClick: BindingActionWithoutArgument?) {
+    setOnClickListener { onClick?.invoke() }
+}
 
 @BindingAdapter(value = ["adapter"])
 fun RecyclerView.adapter(adapter: RecyclerView.Adapter<*>?) {
@@ -51,6 +61,44 @@ fun SearchView.onQueryChanged(onQueryChange: BindingAction<String>?, onQuerySubm
             return false
         }
     })
+}
+
+@BindingAdapter(value = ["onNavigationClick"])
+fun Toolbar.onNavigationClick(onClick: BindingActionWithoutArgument?) {
+    setNavigationOnClickListener { onClick?.invoke() }
+}
+
+@BindingAdapter(value = ["open"])
+fun SlidingPaneLayout.setOpen(isOpen: Boolean?) {
+    if (isOpen != null) {
+        if (isOpen) openPane() else closePane()
+    }
+}
+
+@InverseBindingAdapter(attribute = "open")
+fun SlidingPaneLayout.getOpen(): Boolean = isOpen
+
+@BindingAdapter(value = ["app:openAttrChanged"])
+fun SlidingPaneLayout.openAttrChangedListener(listener: InverseBindingListener) {
+    setPanelSlideListener(object : SlidingPaneLayout.PanelSlideListener{
+
+        override fun onPanelSlide(panel: View, slideOffset: Float) {
+
+        }
+
+        override fun onPanelClosed(panel: View) {
+            listener.onChange()
+        }
+
+        override fun onPanelOpened(panel: View) {
+            listener.onChange()
+        }
+    })
+}
+
+interface BindingActionWithoutArgument {
+
+    fun invoke()
 }
 
 interface BindingAction<T> {
