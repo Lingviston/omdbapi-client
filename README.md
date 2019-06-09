@@ -13,12 +13,15 @@ To build omdbapi Android client you need to do the following steps:
 Omdbapi client uses the following tehnologies:
 1. Room
 2. Retrofit
-3. Lifecycle: ViewModel, LiveData, Paging, ConstraintLayout, RecyclerView
-4. Dagger 2
-5. RxJava 2
-6. Glide
-7. Kotlin
+3. Databinding
+4. Lifecycle: ViewModel, LiveData, Paging, ConstraintLayout, RecyclerView
+5. Dagger 2
+6. RxJava 2
+7. Glide
+8. Kotlin
+9. Mockito
 
 ## Architecture
 1. Application partly utilizes principles of clean architecture;
-2. Application uses MVVM as presentation layer pattern.
+2. Application uses MVVM as presentation layer pattern;
+3. Application uses databinding to properly implement MVVM pattern. To keep the code testable view logic kept very thin.
