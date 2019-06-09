@@ -7,9 +7,9 @@ import by.ve.omdbapiandroid.R
 import by.ve.omdbapiandroid.databinding.ActivityMainBinding
 import by.ve.omdbapiandroid.presentation.viewmodel.MoviesListViewModel
 import by.ve.omdbapiandroid.presentation.viewmodel.ViewModelFactory
+import by.ve.omdbapiandroid.view.extensions.loadViewModel
 import by.ve.omdbapiandroid.view.recyclerview.adapter.MoviesAdapter
 import by.ve.omdbapiandroid.view.recyclerview.adapter.SearchQueriesAdapter
-import by.ve.omdbapiandroid.view.extensions.loadViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -34,7 +34,7 @@ class MainActivity : DaggerAppCompatActivity() {
             it.moviesAdapter = moviesAdapter
             it.viewModel = moviesListViewModel
         }
-        moviesListViewModel.searchesQuery.observe(this, Observer {
+        moviesListViewModel.recentQueries.observe(this, Observer {
             searchQueriesAdapter.submitList(it)
         })
         moviesListViewModel.movies.observe(this, Observer {

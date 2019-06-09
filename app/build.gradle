@@ -76,4 +76,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
+
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_version"
+    testImplementation "androidx.arch.core:core-testing:$androidx_testing_version"
+    testImplementation "pl.pragmatists:JUnitParams:$junit_params_version"
 }

@@ -1,12 +1,14 @@
 package by.ve.omdbapiandroid.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParams
 import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParamsUpdate
 import by.ve.omdbapiandroid.repositories.model.MediaContentType
 import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import java.util.*
 
@@ -36,22 +38,30 @@ class FilterViewModel {
 
     private val restoredFilterParamsSubject = PublishSubject.create<FilterParamsUpdate.FullParamsUpdate>()
 
-    init {
+    private val compositeDisposable = CompositeDisposable()
 
-        val filterParams = Observable.merge(yearSubject, selectedTypesSubject, restoredFilterParamsSubject)
+    init {
+        val filterParams = BehaviorSubject.create<FilterParams>()
+
+        Observable.merge(yearSubject, selectedTypesSubject, restoredFilterParamsSubject)
             .scan(FilterParams.EMPTY, ::reduceUpdatesToFilterParams)
             .distinctUntilChanged()
-            .doOnNext {
-                Log.d("SearchViewModel", "New filter params: $it")
-                selectedYearPosition.value = if (it.year == null) ANY_YEAR_INDEX else years.indexOf(it.year.toString())
-                movieTypeSelected.value = it.type == MediaContentType.MOVIE
-                seriesTypeSelected.value = it.type == MediaContentType.SERIES
-                gameTypeSelected.value = it.type == MediaContentType.GAME
-            }
+            .subscribe(filterParams)
+
+        compositeDisposable += filterParams.subscribe {
+            selectedYearPosition.value = if (it.year == null) ANY_YEAR_INDEX else years.indexOf(it.year.toString())
+            movieTypeSelected.value = it.type == MediaContentType.MOVIE
+            seriesTypeSelected.value = it.type == MediaContentType.SERIES
+            gameTypeSelected.value = it.type == MediaContentType.GAME
+        }
 
         appliedFilterParams = applyFilterSubject.withLatestFrom(filterParams) { _, params ->
             params
         }
+    }
+
+    fun onCleared() {
+        compositeDisposable.dispose()
     }
 
     fun onSelectedYearIndexChanged(yearIndex: Int) {

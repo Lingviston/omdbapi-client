@@ -22,9 +22,9 @@ class MoviesRepositoryImpl(
             year = queryDto.year,
             page = pageNumber,
             type = queryDto.type?.toNetworkType()
-        ).map(
-            searchResultsMapper::mapPage
-        )
+        ).map {
+            searchResultsMapper.mapPage(it)
+        }
 
     private fun MediaContentType.toNetworkType(): String {
         return when (this) {

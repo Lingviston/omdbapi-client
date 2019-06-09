@@ -5,11 +5,15 @@ import by.ve.omdbapiandroid.db.SearchQueriesDao
 import by.ve.omdbapiandroid.db.SearchQueryEntity
 import by.ve.omdbapiandroid.repositories.model.MediaContentType
 import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
+import by.ve.omdbapiandroid.repositories.utils.CurrentTimeProvider
 
 private const val ANY_YEAR = -1
 private const val ANY_TYPE = ""
 
-class SearchQueriesRepositoryImpl(private val searchQueriesDao: SearchQueriesDao) : SearchQueriesRepository {
+class SearchQueriesRepositoryImpl(
+    private val searchQueriesDao: SearchQueriesDao,
+    private val currentTimeProvider: CurrentTimeProvider
+) : SearchQueriesRepository {
 
     override fun getAllSearchQueriesListFactory(): DataSource.Factory<Int, SearchQueryDto> =
         searchQueriesDao.getAll().map { entity ->
@@ -26,7 +30,7 @@ class SearchQueriesRepositoryImpl(private val searchQueriesDao: SearchQueriesDao
                 query = searchQuery.query,
                 year = searchQuery.year ?: ANY_YEAR,
                 type = searchQuery.type?.name ?: ANY_TYPE,
-                timestamp = System.currentTimeMillis()
+                timestamp = currentTimeProvider.getCurrentTimeMs()
             )
         )
     }

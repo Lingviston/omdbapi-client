@@ -1,6 +1,6 @@
 package by.ve.omdbapiandroid.presentation.viewmodel
 
-import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,7 +31,7 @@ class MoviesListViewModel @Inject constructor(
 
     val movies: LiveData<PagedList<MovieAdapterItem>> = movieAdapterItemPagedListBuilder.build()
 
-    val searchesQuery: LiveData<PagedList<SearchQueryAdapterItem>> =
+    val recentQueries: LiveData<PagedList<SearchQueryAdapterItem>> =
         searchQueryAdapterItemPagedListBuilder.build(::onRecentQuerySelected)
 
     val query = MutableLiveData<String>()
@@ -50,7 +50,9 @@ class MoviesListViewModel @Inject constructor(
         startListeningSearchQuery()
     }
 
-    override fun onCleared() {
+    @VisibleForTesting
+    public override fun onCleared() {
+        filterViewModel.onCleared()
         movieAdapterItemPagedListBuilder.dispose()
         compositeDisposable.dispose()
     }
@@ -74,8 +76,8 @@ class MoviesListViewModel @Inject constructor(
 
     private fun startListeningSearchQuery() {
         val queryUpdates = querySubject
-            .debounce(USER_INPUT_DEBOUNCE, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
+            .debounce(USER_INPUT_DEBOUNCE, TimeUnit.MILLISECONDS)
             .map { SearchQueryUpdate.QueryUpdate(it) }
 
         val filterParamsUpdates = filterViewModel.appliedFilterParams
@@ -88,7 +90,6 @@ class MoviesListViewModel @Inject constructor(
             .distinctUntilChanged()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { queryDto ->
-                Log.d("SearchViewModel", "New search $queryDto")
                 filterViewModel.onFilterParamsRestored(
                     FilterParams(
                         year = queryDto.year,
