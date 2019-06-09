@@ -12,8 +12,8 @@ import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
 import by.ve.omdbapiandroid.view.MovieAdapterItem
 import by.ve.omdbapiandroid.view.SearchQueryAdapterItem
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
@@ -30,7 +30,7 @@ class MoviesListViewModel @Inject constructor(
 
     val searchesQuery: LiveData<PagedList<SearchQueryAdapterItem>>
 
-    val query = MutableLiveData<String>("")
+    val query = MutableLiveData<String>()
 
     val recentSearchesOpen = MutableLiveData<Boolean>(false)
 
@@ -76,7 +76,6 @@ class MoviesListViewModel @Inject constructor(
     }
 
     fun onSearchQuerySubmit(newQuery: String) {
-        query.value = newQuery
         querySubject.onNext(newQuery)
     }
 
@@ -94,28 +93,37 @@ class MoviesListViewModel @Inject constructor(
     }
 
     private fun startListeningSearchQuery() {
-        val queryObservable = querySubject
+        val queryUpdates = querySubject
             .debounce(USER_INPUT_DEBOUNCE, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
-        val filterParamsObservable = filterViewModel.filterParams.startWith(FilterParams())
+            .map { SearchQueryUpdate.QueryUpdate(it) }
 
-        val newQueryObservable = Observables.combineLatest(
-            queryObservable,
-            filterParamsObservable
-        ) { query, params ->
-            Log.d("SearchViewModel", "Query: $query, params: ${params.year}")
-            SearchQueryDto(query = query, year = params.year)
-        }
+        val filterParamsUpdates = filterViewModel.filterParams
+            .map { SearchQueryUpdate.FilterParamsUpdate(it) }
 
-        val recentQueryObservable = recentQuerySubject.doOnNext {
-            query.value = it.query
-            filterViewModel.onFilterParamsRestored(FilterParams(year = it.year))
-        }
+        val recentQueryUpdates = recentQuerySubject.map { SearchQueryUpdate.FullQueryUpdate(it) }
 
-        compositeDisposable += Observable.merge(newQueryObservable, recentQueryObservable)
+        compositeDisposable += Observable.merge(queryUpdates, filterParamsUpdates, recentQueryUpdates)
+            .scan(SearchQueryDto.EMPTY, ::reduceUpdatesToSearchQueryDto)
             .distinctUntilChanged()
-            .subscribe { query ->
-                moviesDataSourceFactory.query = query
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { queryDto ->
+                Log.d("SearchViewModel", "New search $queryDto")
+                query.value = queryDto.query
+                filterViewModel.onFilterParamsRestored(FilterParams(year = queryDto.year))
+                moviesDataSourceFactory.query = queryDto
             }
+    }
+
+    private fun reduceUpdatesToSearchQueryDto(oldDto: SearchQueryDto, update: SearchQueryUpdate): SearchQueryDto {
+        return when (update) {
+            is SearchQueryUpdate.QueryUpdate -> oldDto.copy(
+                query = update.query
+            )
+            is SearchQueryUpdate.FilterParamsUpdate -> oldDto.copy(
+                year = update.filterParams.year
+            )
+            is SearchQueryUpdate.FullQueryUpdate -> update.searchQueryDto
+        }
     }
 }
