@@ -9,4 +9,8 @@
     <string name="type_movie">Movie</string>
     <string name="type_game">Game</string>
     <string name="apply_filter">Apply Filter</string>
+    <string name="title_pattern">Title: %1$s</string>
+    <string name="year_pattern">Year: %1$s</string>
+    <string name="type_pattern">Type: %1$s</string>
+    <string name="any_value">Any</string>
 </resources>

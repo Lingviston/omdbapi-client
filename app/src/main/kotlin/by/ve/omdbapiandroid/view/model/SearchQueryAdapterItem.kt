@@ -3,7 +3,7 @@ package by.ve.omdbapiandroid.view.model
 import androidx.recyclerview.widget.DiffUtil
 
 
-class SearchQueryAdapterItem(val query: String, val year: String, val type: String, private val onClick: () -> Unit) {
+class SearchQueryAdapterItem(val title: String, val year: String, val type: String, private val onClick: () -> Unit) {
 
     fun onClick() {
         onClick.invoke()
@@ -17,7 +17,7 @@ class SearchQueryAdapterItem(val query: String, val year: String, val type: Stri
                 oldItem: SearchQueryAdapterItem,
                 newItem: SearchQueryAdapterItem
             ): Boolean =
-                oldItem.query == newItem.query && oldItem.year == newItem.year && oldItem.type == newItem.type
+                oldItem.title == newItem.title && oldItem.year == newItem.year && oldItem.type == newItem.type
 
             override fun areContentsTheSame(
                 oldItemQuery: SearchQueryAdapterItem,
