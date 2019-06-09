@@ -1,7 +1,8 @@
-package by.ve.omdbapiandroid.db
+package by.ve.omdbapiandroid.db.dagger
 
 import android.app.Application
 import androidx.room.Room
+import by.ve.omdbapiandroid.db.SearchQueriesDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

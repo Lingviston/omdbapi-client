@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.view
+package by.ve.omdbapiandroid.view.model
 
 import androidx.recyclerview.widget.DiffUtil
 

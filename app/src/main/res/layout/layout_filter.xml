@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="by.ve.omdbapiandroid.presentation.FilterViewModel" />
+            type="by.ve.omdbapiandroid.presentation.viewmodel.FilterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

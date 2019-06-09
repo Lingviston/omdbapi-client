@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="by.ve.omdbapiandroid.view.SearchQueryAdapterItem" />
+            type="by.ve.omdbapiandroid.view.model.SearchQueryAdapterItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.view
+package by.ve.omdbapiandroid.view.databinding
 
 import android.R
 import android.view.View
@@ -11,6 +11,7 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
+import by.ve.omdbapiandroid.view.recyclerview.ItemOffsetDecoration
 import com.bumptech.glide.Glide
 
 

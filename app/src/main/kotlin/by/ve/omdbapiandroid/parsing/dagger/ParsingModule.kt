@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.parsing
+package by.ve.omdbapiandroid.parsing.dagger
 
 import com.squareup.moshi.Moshi
 import dagger.Module

@@ -5,8 +5,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import by.ve.omdbapiandroid.R
 import by.ve.omdbapiandroid.databinding.ActivityMainBinding
-import by.ve.omdbapiandroid.presentation.MoviesListViewModel
-import by.ve.omdbapiandroid.presentation.ViewModelFactory
+import by.ve.omdbapiandroid.presentation.viewmodel.MoviesListViewModel
+import by.ve.omdbapiandroid.presentation.viewmodel.ViewModelFactory
+import by.ve.omdbapiandroid.view.recyclerview.adapter.MoviesAdapter
+import by.ve.omdbapiandroid.view.recyclerview.adapter.SearchQueriesAdapter
+import by.ve.omdbapiandroid.view.extensions.loadViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 

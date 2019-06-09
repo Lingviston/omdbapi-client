@@ -1,14 +1,16 @@
-package by.ve.omdbapiandroid.view
+package by.ve.omdbapiandroid.view.recyclerview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.ve.omdbapiandroid.databinding.ItemRecentSearchBinding
+import by.ve.omdbapiandroid.view.model.SearchQueryAdapterItem
 
 
-class SearchQueriesAdapter :
-    PagedListAdapter<SearchQueryAdapterItem, SearchQueriesAdapter.ViewHolder>(SearchQueryAdapterItem.diffCallback) {
+class SearchQueriesAdapter : PagedListAdapter<SearchQueryAdapterItem, SearchQueriesAdapter.ViewHolder>(
+    SearchQueryAdapterItem.diffCallback
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

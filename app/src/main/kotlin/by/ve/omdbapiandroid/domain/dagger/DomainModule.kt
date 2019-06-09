@@ -1,5 +1,7 @@
-package by.ve.omdbapiandroid.domain
+package by.ve.omdbapiandroid.domain.dagger
 
+import by.ve.omdbapiandroid.domain.MoviesDataSourceFactory
+import by.ve.omdbapiandroid.domain.RecentSearchesDataSourceFactory
 import by.ve.omdbapiandroid.repositories.MoviesRepository
 import by.ve.omdbapiandroid.repositories.SearchQueriesRepository
 import dagger.Module

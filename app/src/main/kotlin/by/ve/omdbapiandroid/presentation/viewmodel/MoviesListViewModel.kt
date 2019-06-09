@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.presentation
+package by.ve.omdbapiandroid.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,9 +8,12 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import by.ve.omdbapiandroid.domain.MoviesDataSourceFactory
 import by.ve.omdbapiandroid.domain.RecentSearchesDataSourceFactory
+import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParams
+import by.ve.omdbapiandroid.presentation.viewmodel.model.SearchQueryUpdate
+import by.ve.omdbapiandroid.presentation.lifecycle.SingleLiveEvent
 import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
-import by.ve.omdbapiandroid.view.MovieAdapterItem
-import by.ve.omdbapiandroid.view.SearchQueryAdapterItem
+import by.ve.omdbapiandroid.view.model.MovieAdapterItem
+import by.ve.omdbapiandroid.view.model.SearchQueryAdapterItem
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -110,7 +113,12 @@ class MoviesListViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { queryDto ->
                 Log.d("SearchViewModel", "New search $queryDto")
-                filterViewModel.onFilterParamsRestored(FilterParams(year = queryDto.year, type = queryDto.type))
+                filterViewModel.onFilterParamsRestored(
+                    FilterParams(
+                        year = queryDto.year,
+                        type = queryDto.type
+                    )
+                )
                 query.value = queryDto.query
                 moviesDataSourceFactory.query = queryDto
             }

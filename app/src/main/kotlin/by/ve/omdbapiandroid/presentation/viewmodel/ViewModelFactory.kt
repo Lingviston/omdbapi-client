@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.presentation
+package by.ve.omdbapiandroid.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

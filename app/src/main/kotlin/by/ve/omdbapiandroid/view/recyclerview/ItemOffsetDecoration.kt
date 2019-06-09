@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.view
+package by.ve.omdbapiandroid.view.recyclerview
 
 import android.graphics.Rect
 import android.view.View

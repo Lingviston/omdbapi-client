@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package by.ve.omdbapiandroid.presentation
+package by.ve.omdbapiandroid.presentation.lifecycle
 
 import android.util.Log
 import androidx.annotation.MainThread

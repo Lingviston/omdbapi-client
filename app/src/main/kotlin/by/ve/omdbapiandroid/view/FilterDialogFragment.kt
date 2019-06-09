@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import by.ve.omdbapiandroid.databinding.LayoutFilterBinding
-import by.ve.omdbapiandroid.presentation.MoviesListViewModel
-import by.ve.omdbapiandroid.presentation.ViewModelFactory
+import by.ve.omdbapiandroid.presentation.viewmodel.MoviesListViewModel
+import by.ve.omdbapiandroid.presentation.viewmodel.ViewModelFactory
+import by.ve.omdbapiandroid.view.extensions.loadActivityViewModel
 import dagger.android.support.DaggerDialogFragment
 import javax.inject.Inject
 

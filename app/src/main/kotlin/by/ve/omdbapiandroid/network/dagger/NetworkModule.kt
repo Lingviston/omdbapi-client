@@ -1,6 +1,8 @@
-package by.ve.omdbapiandroid.network
+package by.ve.omdbapiandroid.network.dagger
 
 import by.ve.omdbapiandroid.BuildConfig
+import by.ve.omdbapiandroid.network.ApiKeyAddingInterceptor
+import by.ve.omdbapiandroid.network.SearchService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

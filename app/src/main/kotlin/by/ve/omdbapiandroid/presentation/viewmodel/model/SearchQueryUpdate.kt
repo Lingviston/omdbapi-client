@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.presentation
+package by.ve.omdbapiandroid.presentation.viewmodel.model
 
 import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
 

@@ -1,5 +1,8 @@
-package by.ve.omdbapiandroid.view
+package by.ve.omdbapiandroid.view.dagger
 
+import by.ve.omdbapiandroid.view.MainActivity
+import by.ve.omdbapiandroid.view.recyclerview.adapter.MoviesAdapter
+import by.ve.omdbapiandroid.view.recyclerview.adapter.SearchQueriesAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

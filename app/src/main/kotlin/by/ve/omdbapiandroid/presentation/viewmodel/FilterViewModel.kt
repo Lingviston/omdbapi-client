@@ -1,7 +1,9 @@
-package by.ve.omdbapiandroid.presentation
+package by.ve.omdbapiandroid.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParams
+import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParamsUpdate
 import by.ve.omdbapiandroid.repositories.model.MediaContentType
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.withLatestFrom

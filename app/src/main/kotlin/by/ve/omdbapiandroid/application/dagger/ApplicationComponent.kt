@@ -1,12 +1,13 @@
-package by.ve.omdbapiandroid.application
+package by.ve.omdbapiandroid.application.dagger
 
 import android.app.Application
-import by.ve.omdbapiandroid.db.DatabaseModule
-import by.ve.omdbapiandroid.domain.DomainModule
-import by.ve.omdbapiandroid.network.NetworkModule
-import by.ve.omdbapiandroid.parsing.ParsingModule
-import by.ve.omdbapiandroid.repositories.RepositoriesModule
-import by.ve.omdbapiandroid.view.MainActivityModule
+import by.ve.omdbapiandroid.application.OmdbapiApplication
+import by.ve.omdbapiandroid.db.dagger.DatabaseModule
+import by.ve.omdbapiandroid.domain.dagger.DomainModule
+import by.ve.omdbapiandroid.network.dagger.NetworkModule
+import by.ve.omdbapiandroid.parsing.dagger.ParsingModule
+import by.ve.omdbapiandroid.repositories.dagger.RepositoriesModule
+import by.ve.omdbapiandroid.view.dagger.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

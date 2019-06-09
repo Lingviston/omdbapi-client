@@ -1,7 +1,11 @@
-package by.ve.omdbapiandroid.repositories
+package by.ve.omdbapiandroid.repositories.dagger
 
 import by.ve.omdbapiandroid.db.SearchQueriesDao
 import by.ve.omdbapiandroid.network.SearchService
+import by.ve.omdbapiandroid.repositories.MoviesRepository
+import by.ve.omdbapiandroid.repositories.MoviesRepositoryImpl
+import by.ve.omdbapiandroid.repositories.SearchQueriesRepository
+import by.ve.omdbapiandroid.repositories.SearchQueriesRepositoryImpl
 import by.ve.omdbapiandroid.repositories.model.SearchResultsMapper
 import by.ve.omdbapiandroid.repositories.model.SearchResultsMapperImpl
 import dagger.Module

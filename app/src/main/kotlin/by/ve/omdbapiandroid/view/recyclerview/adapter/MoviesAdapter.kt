@@ -1,4 +1,4 @@
-package by.ve.omdbapiandroid.view
+package by.ve.omdbapiandroid.view.recyclerview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.ve.omdbapiandroid.databinding.ItemLoadingBinding
 import by.ve.omdbapiandroid.databinding.ItemMovieBinding
+import by.ve.omdbapiandroid.view.model.MovieAdapterItem
 
 private const val VIEW_TYPE_LOADED = 0
 private const val VIEW_TYPE_LOADING = 1

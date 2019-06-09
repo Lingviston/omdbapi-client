@@ -7,15 +7,15 @@
 
         <variable
             name="searchQueriesAdapter"
-            type="by.ve.omdbapiandroid.view.SearchQueriesAdapter" />
+            type="by.ve.omdbapiandroid.view.recyclerview.adapter.SearchQueriesAdapter" />
 
         <variable
             name="moviesAdapter"
-            type="by.ve.omdbapiandroid.view.MoviesAdapter" />
+            type="by.ve.omdbapiandroid.view.recyclerview.adapter.MoviesAdapter" />
 
         <variable
             name="viewModel"
-            type="by.ve.omdbapiandroid.presentation.MoviesListViewModel" />
+            type="by.ve.omdbapiandroid.presentation.viewmodel.MoviesListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
