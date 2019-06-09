@@ -81,6 +81,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="#EFEFEF"
             app:adapter="@{moviesAdapter}"
             app:itemSpacing="@{@dimen/spacing_8}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
