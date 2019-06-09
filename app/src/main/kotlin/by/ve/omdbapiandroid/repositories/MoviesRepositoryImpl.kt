@@ -1,12 +1,15 @@
 package by.ve.omdbapiandroid.repositories
 
 import by.ve.omdbapiandroid.network.SearchService
+import by.ve.omdbapiandroid.repositories.model.MediaContentType
 import by.ve.omdbapiandroid.repositories.model.MoviesPageDto
 import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
 import by.ve.omdbapiandroid.repositories.model.SearchResultsMapper
 import io.reactivex.Single
 
 private const val TYPE_MOVIE = "movie"
+private const val TYPE_SERIES = "series"
+private const val TYPE_EPISODE = "episode"
 
 class MoviesRepositoryImpl(
     private val searchService: SearchService,
@@ -18,8 +21,16 @@ class MoviesRepositoryImpl(
             query = queryDto.query,
             year = queryDto.year,
             page = pageNumber,
-            type = TYPE_MOVIE
+            type = queryDto.type?.toNetworkType()
         ).map(
             searchResultsMapper::mapPage
         )
+
+    private fun MediaContentType.toNetworkType(): String {
+        return when (this) {
+            MediaContentType.MOVIE -> TYPE_MOVIE
+            MediaContentType.SERIES -> TYPE_SERIES
+            MediaContentType.EPISODE -> TYPE_EPISODE
+        }
+    }
 }

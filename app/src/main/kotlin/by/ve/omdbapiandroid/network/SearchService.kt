@@ -12,6 +12,6 @@ interface SearchService {
         @Query("s") query: String,
         @Query("y") year: Int?,
         @Query("page") page: Int,
-        @Query("type") type: String
+        @Query("type") type: String?
     ): Single<MoviesPageJson>
 }

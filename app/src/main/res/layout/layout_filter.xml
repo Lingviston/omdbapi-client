@@ -26,17 +26,18 @@
             android:id="@+id/yearSelector"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:onItemSelected="@{viewModel::onSelectedYearIndexChanged}"
             app:entries="@{viewModel.years}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/yearSelectorCaption"
+            app:onItemSelected="@{viewModel::onSelectedYearIndexChanged}"
             app:selectedPosition="@{viewModel.selectedYearPosition}" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/typesSelector"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/yearSelector">
@@ -45,19 +46,25 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_movie" />
+                android:text="@string/type_movie"
+                app:checked="@{viewModel.movieTypeSelected}"
+                app:onCheckedChanged="@{viewModel::onMovieCheckChanged}" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_series" />
+                android:text="@string/type_series"
+                app:checked="@{viewModel.seriesTypeSelected}"
+                app:onCheckedChanged="@{viewModel::onSeriesCheckChanged}" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_episode" />
+                android:text="@string/type_episode"
+                app:checked="@{viewModel.episodeTypeSelected}"
+                app:onCheckedChanged="@{viewModel::onEpisodeCheckChanged}" />
         </com.google.android.material.chip.ChipGroup>
 
         <Button
@@ -65,9 +72,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/apply_filter"
-            app:onClick="@{viewModel::onApplyFilterPressed}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/typesSelector" />
+            app:layout_constraintTop_toBottomOf="@id/typesSelector"
+            app:onClick="@{viewModel::onApplyFilterPressed}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

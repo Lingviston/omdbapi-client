@@ -2,10 +2,7 @@ package by.ve.omdbapiandroid.view
 
 import android.R
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -129,6 +126,18 @@ fun Spinner.setSelectedPosition(position: Int?) {
     if (position != null && position != selectedItemPosition) {
         setSelection(position)
     }
+}
+
+@BindingAdapter(value = ["checked"])
+fun CompoundButton.checked(isChecked: Boolean?) {
+    if (isChecked != null && isChecked != isChecked()) {
+        setChecked(isChecked)
+    }
+}
+
+@BindingAdapter(value = ["onCheckedChanged"])
+fun CompoundButton.onCheckedChanged(onCheckedChanged: BindingAction<Boolean>?) {
+    setOnCheckedChangeListener { _, isChecked -> onCheckedChanged?.invoke(isChecked) }
 }
 
 interface BindingActionWithoutArgument {

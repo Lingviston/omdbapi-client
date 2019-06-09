@@ -64,6 +64,7 @@ class MoviesListViewModel @Inject constructor(
             SearchQueryAdapterItem(
                 query = it.query,
                 year = it.year.toString(),
+                type = it.type.toString(),
                 onClick = { onRecentQuerySelected(it) }
             )
         }, 10).build()
@@ -98,7 +99,7 @@ class MoviesListViewModel @Inject constructor(
             .distinctUntilChanged()
             .map { SearchQueryUpdate.QueryUpdate(it) }
 
-        val filterParamsUpdates = filterViewModel.filterParams
+        val filterParamsUpdates = filterViewModel.appliedFilterParams
             .map { SearchQueryUpdate.FilterParamsUpdate(it) }
 
         val recentQueryUpdates = recentQuerySubject.map { SearchQueryUpdate.FullQueryUpdate(it) }
@@ -109,8 +110,8 @@ class MoviesListViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { queryDto ->
                 Log.d("SearchViewModel", "New search $queryDto")
+                filterViewModel.onFilterParamsRestored(FilterParams(year = queryDto.year, type = queryDto.type))
                 query.value = queryDto.query
-                filterViewModel.onFilterParamsRestored(FilterParams(year = queryDto.year))
                 moviesDataSourceFactory.query = queryDto
             }
     }
@@ -121,7 +122,8 @@ class MoviesListViewModel @Inject constructor(
                 query = update.query
             )
             is SearchQueryUpdate.FilterParamsUpdate -> oldDto.copy(
-                year = update.filterParams.year
+                year = update.filterParams.year,
+                type = update.filterParams.type
             )
             is SearchQueryUpdate.FullQueryUpdate -> update.searchQueryDto
         }
