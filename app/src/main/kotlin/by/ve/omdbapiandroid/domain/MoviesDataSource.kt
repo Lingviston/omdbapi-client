@@ -30,7 +30,7 @@ class MoviesDataSource(
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<MovieDto>) {
         if (params.startPosition % PAGE_SIZE != 0) {
-            throw IllegalArgumentException("Invalid paged list config. Please, enable placeholders and set page size to 10.")
+            throw IllegalArgumentException("Please, enable placeholders and set page size to 10.")
         }
 
         compositeDisposable += moviesRepository.findMovies(queryDto, params.pageNumber).subscribeBy(
