@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Omdbapi Android</string>
 
-    <string name="recent_searches">Recent Searches</string>
+    <string name="recent_searches_title">Recent Searches:</string>
     <string name="filter">Filter</string>
     <string name="search_hint">Enter a movie title</string>
     <string name="filter_year">Filter by year</string>

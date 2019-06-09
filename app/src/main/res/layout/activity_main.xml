@@ -23,14 +23,11 @@
         android:layout_height="match_parent"
         app:open="@={viewModel.recentSearchesOpen}">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <include
+            layout="@layout/layout_recent_searches"
             android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:adapter="@{searchQueriesAdapter}"
-            app:itemSpacing="@{@dimen/spacing_8}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_recent_search" />
+            app:searchQueriesAdapter="@{searchQueriesAdapter}" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"

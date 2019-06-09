@@ -1,6 +1,5 @@
 package by.ve.omdbapiandroid.view.databinding
 
-import android.R
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.SearchView
@@ -9,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import by.ve.omdbapiandroid.view.recyclerview.ItemOffsetDecoration
@@ -24,6 +24,13 @@ fun View.onClick(onClick: BindingActionWithoutArgument?) {
 fun RecyclerView.adapter(adapter: RecyclerView.Adapter<*>?) {
     if (adapter != null) {
         this.adapter = adapter
+    }
+}
+
+@BindingAdapter(value = ["showHorizontalDividers"])
+fun RecyclerView.showHorizontalDividers(show: Boolean?) {
+    if (show != null && show) {
+        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
 }
 
@@ -102,8 +109,8 @@ fun SlidingPaneLayout.openAttrChangedListener(listener: InverseBindingListener) 
 @BindingAdapter(value = ["entries"])
 fun Spinner.entries(entries: Array<Any>?) {
     if (entries != null) {
-        val adapter = ArrayAdapter(context, R.layout.simple_dropdown_item_1line, entries)
-        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, entries)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         setAdapter(adapter)
     }
 }

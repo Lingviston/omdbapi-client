@@ -50,7 +50,6 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/panelsSeparator"
             android:layout_width="wrap_content"
@@ -68,19 +67,16 @@
             app:layout_constraintTop_toBottomOf="@id/appBar"
             app:viewModel="@{viewModel.filterViewModel}" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <include
             android:id="@+id/recentQueries"
+            layout="@layout/layout_recent_searches"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            app:adapter="@{searchQueriesAdapter}"
-            app:itemSpacing="@{@dimen/spacing_8}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/panelsSeparator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter"
-            tools:listitem="@layout/item_recent_search" />
+            app:searchQueriesAdapter="@{searchQueriesAdapter}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
