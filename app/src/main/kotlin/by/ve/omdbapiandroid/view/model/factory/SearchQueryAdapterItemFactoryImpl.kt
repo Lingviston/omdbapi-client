@@ -9,14 +9,14 @@ import by.ve.omdbapiandroid.view.model.SearchQueryAdapterItem
 
 class SearchQueryAdapterItemFactoryImpl(application: Application) : SearchQueryAdapterItemFactory {
 
-    private val anyValue = application.resources.getString(R.string.any_value)
-    private val titlePattern = application.resources.getString(R.string.title_pattern)
-    private val yearPattern = application.resources.getString(R.string.year_pattern)
-    private val typePattern = application.resources.getString(R.string.type_pattern)
+    private val anyValue = application.getString(R.string.any_value)
+    private val titlePattern = application.getString(R.string.title_pattern)
+    private val yearPattern = application.getString(R.string.year_pattern)
+    private val typePattern = application.getString(R.string.type_pattern)
 
-    private val movieType = application.resources.getString(R.string.type_movie)
-    private val seriesType = application.resources.getString(R.string.type_series)
-    private val gameType = application.resources.getString(R.string.type_game)
+    private val movieType = application.getString(R.string.type_movie)
+    private val seriesType = application.getString(R.string.type_series)
+    private val gameType = application.getString(R.string.type_game)
 
     override fun create(dto: SearchQueryDto, onClickAction: (SearchQueryDto) -> Unit): SearchQueryAdapterItem {
         return SearchQueryAdapterItem(

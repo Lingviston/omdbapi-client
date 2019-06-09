@@ -1,6 +1,8 @@
 package by.ve.omdbapiandroid.presentation.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import by.ve.omdbapiandroid.R
 import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParams
 import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParamsUpdate
 import by.ve.omdbapiandroid.repositories.model.MediaContentType
@@ -13,12 +15,12 @@ import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 private const val MINIMAL_YEAR = 1900
-private const val ANY_YEAR = "Any"
 private const val ANY_YEAR_INDEX = 0
 
-class FilterViewModel {
+class FilterViewModel(application: Application) {
 
-    val years = arrayOf(ANY_YEAR) + (Calendar.getInstance()[Calendar.YEAR] downTo MINIMAL_YEAR).map { it.toString() }
+    val years = arrayOf(application.getString(R.string.any_value)) +
+            (Calendar.getInstance()[Calendar.YEAR] downTo MINIMAL_YEAR).map { it.toString() }
 
     val selectedYearPosition = MutableLiveData<Int>(null)
 

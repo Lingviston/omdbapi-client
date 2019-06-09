@@ -1,8 +1,12 @@
 package by.ve.omdbapiandroid.presentation.viewmodel
 
+import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import by.ve.omdbapiandroid.R
 import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParams
 import by.ve.omdbapiandroid.repositories.model.MediaContentType
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.observers.TestObserver
 import junitparams.JUnitParamsRunner
 import junitparams.Parameters
@@ -23,7 +27,11 @@ class FilterViewModelTest {
         @get:Rule
         val liveDataRule = InstantTaskExecutorRule()
 
-        protected val tested by lazy { FilterViewModel() }
+        private val application: Application = mock {
+            on { getString(R.string.any_value) } doReturn "Any"
+        }
+
+        protected val tested by lazy { FilterViewModel(application) }
     }
 
     class InitialStateTest : BaseTest() {

@@ -1,5 +1,6 @@
 package by.ve.omdbapiandroid.presentation.dagger
 
+import android.app.Application
 import by.ve.omdbapiandroid.domain.MoviesDataSourceFactory
 import by.ve.omdbapiandroid.domain.RecentSearchesDataSourceFactory
 import by.ve.omdbapiandroid.presentation.paging.MovieAdapterItemPagedListBuilder
@@ -28,5 +29,5 @@ class PresentationModule {
     ) = SearchQueryAdapterItemPagedListBuilder(recentSearchesDataSourceFactory, searchQueryAdapterItemFactory)
 
     @Provides
-    fun provideFilterViewModel() = FilterViewModel()
+    fun provideFilterViewModel(application: Application) = FilterViewModel(application)
 }
