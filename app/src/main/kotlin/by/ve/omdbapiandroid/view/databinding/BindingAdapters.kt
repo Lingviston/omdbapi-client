@@ -5,6 +5,7 @@ import android.widget.CompoundButton
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
+import by.ve.omdbapiandroid.R
 import com.bumptech.glide.Glide
 
 
@@ -16,7 +17,7 @@ fun View.onClick(onClick: BindingActionWithoutArgument?) {
 @BindingAdapter(value = ["imageUrl"])
 fun ImageView.imageUrl(url: String?) {
     if (url != null) {
-        Glide.with(this).load(url).into(this)
+        Glide.with(this).load(url).placeholder(R.drawable.img_placeholder).error(R.drawable.img_placeholder).into(this)
     }
 }
 
