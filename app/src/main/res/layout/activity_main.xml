@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:iconifiedByDefault="false"
-                        app:onQuerySubmit="@{viewModel::onSearchQuerySubmit}"
+                        app:onQueryChange="@{viewModel::onSearchQueryChange}"
                         app:query="@{viewModel.query}"
                         app:queryBackground="@null"
                         app:queryHint="@string/search_hint"

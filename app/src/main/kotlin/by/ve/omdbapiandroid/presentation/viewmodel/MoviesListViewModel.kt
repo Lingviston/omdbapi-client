@@ -57,7 +57,7 @@ class MoviesListViewModel @Inject constructor(
         compositeDisposable.dispose()
     }
 
-    fun onSearchQuerySubmit(newQuery: String) {
+    fun onSearchQueryChange(newQuery: String) {
         querySubject.onNext(newQuery)
     }
 

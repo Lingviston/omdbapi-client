@@ -118,9 +118,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when less than 500ms left then do not search new query`() {
+        fun `given search query changed when less than 500ms left then do not search new query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -132,9 +132,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when less than 500ms left then do not display new query`() {
+        fun `given search query changed when less than 500ms left then do not display new query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -144,9 +144,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when less than 500ms left then do not update filter viewmodel with new params`() {
+        fun `given search query changed when less than 500ms left then do not update filter viewmodel with new params`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -156,9 +156,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when more than 500ms left then search new query`() {
+        fun `given search query changed when more than 500ms left then search new query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -170,9 +170,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when more than 500ms left then display new query`() {
+        fun `given search query changed when more than 500ms left then display new query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -182,9 +182,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when more than 500ms left then update filter viewmodel with new params`() {
+        fun `given search query changed when more than 500ms left then update filter viewmodel with new params`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -194,11 +194,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when less than 500ms left since another query then do not search original query`() {
+        fun `given search query changed and after less than 500ms another query changed when less than 500ms left since another query then do not search original query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -210,11 +210,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when less than 500ms left since another query then do not search another query`() {
+        fun `given search query changed and after less than 500ms another query changed when less than 500ms left since another query then do not search another query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -226,11 +226,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when less than 500ms left since another query then do not display any of those queries`() {
+        fun `given search query changed and after less than 500ms another query changed when less than 500ms left since another query then do not display any of those queries`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -240,11 +240,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when less than 500ms left since another query then do not update filter viewmodel with new params`() {
+        fun `given search query changed and after less than 500ms another query changed when less than 500ms left since another query then do not update filter viewmodel with new params`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -254,11 +254,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms the same query submitted again when 500ms left since first submission then search the query`() {
+        fun `given search query changed and after less than 500ms the same query changed again when 500ms left since first submission then search the query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -270,11 +270,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms the same query submitted again when 500ms left since first submission then display the query`() {
+        fun `given search query changed and after less than 500ms the same query changed again when 500ms left since first submission then display the query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -284,11 +284,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms the same query submitted again when 500ms left since first submission then update filter viewmodel with new params`() {
+        fun `given search query changed and after less than 500ms the same query changed again when 500ms left since first submission then update filter viewmodel with new params`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
 
             // when
             testScheduler.advanceTimeByMs(250)
@@ -298,11 +298,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when more than 500ms left since another query then do not search original query`() {
+        fun `given search query changed and after less than 500ms another query changed when more than 500ms left since another query then do not search original query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -314,11 +314,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when more than 500ms left since another query then search another query`() {
+        fun `given search query changed and after less than 500ms another query changed when more than 500ms left since another query then search another query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -330,11 +330,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when more than 500ms left since another query then display another query`() {
+        fun `given search query changed and after less than 500ms another query changed when more than 500ms left since another query then display another query`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -344,11 +344,11 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted and after less than 500ms another query submitted when more than 500ms left since another query then update filter viewmodel with new params`() {
+        fun `given search query changed and after less than 500ms another query changed when more than 500ms left since another query then update filter viewmodel with new params`() {
             // given
-            tested.onSearchQuerySubmit("New query")
+            tested.onSearchQueryChange("New query")
             testScheduler.advanceTimeByMs(250)
-            tested.onSearchQuerySubmit("Another query")
+            tested.onSearchQueryChange("Another query")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -358,9 +358,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given the same search query submitted when more than 500ms left then do not search new query`() {
+        fun `given the same search query changed when more than 500ms left then do not search new query`() {
             // given
-            tested.onSearchQuerySubmit("")
+            tested.onSearchQueryChange("")
 
             // when
             testScheduler.advanceTimeByMs(501)
@@ -372,9 +372,9 @@ class MoviesListViewModelTest {
         }
 
         @Test
-        fun `given search query submitted when more than 500ms left then do not update filter viewmodel with new params`() {
+        fun `given search query changed when more than 500ms left then do not update filter viewmodel with new params`() {
             // given
-            tested.onSearchQuerySubmit("")
+            tested.onSearchQueryChange("")
 
             // when
             testScheduler.advanceTimeByMs(501)
