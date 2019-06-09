@@ -6,8 +6,9 @@ import by.ve.omdbapiandroid.db.dagger.DatabaseModule
 import by.ve.omdbapiandroid.domain.dagger.DomainModule
 import by.ve.omdbapiandroid.network.dagger.NetworkModule
 import by.ve.omdbapiandroid.parsing.dagger.ParsingModule
+import by.ve.omdbapiandroid.presentation.dagger.PresentationModule
 import by.ve.omdbapiandroid.repositories.dagger.RepositoriesModule
-import by.ve.omdbapiandroid.view.dagger.MainActivityModule
+import by.ve.omdbapiandroid.view.dagger.ViewModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -20,8 +21,9 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         ParsingModule::class,
         NetworkModule::class,
-        MainActivityModule::class,
+        ViewModule::class,
         RepositoriesModule::class,
+        PresentationModule::class,
         DomainModule::class,
         DatabaseModule::class
     ]

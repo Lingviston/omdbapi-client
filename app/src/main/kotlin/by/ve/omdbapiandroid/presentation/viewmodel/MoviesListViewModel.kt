@@ -4,13 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import by.ve.omdbapiandroid.domain.MoviesDataSourceFactory
-import by.ve.omdbapiandroid.domain.RecentSearchesDataSourceFactory
+import by.ve.omdbapiandroid.presentation.lifecycle.SingleLiveEvent
+import by.ve.omdbapiandroid.presentation.paging.MovieAdapterItemPagedListBuilder
+import by.ve.omdbapiandroid.presentation.paging.SearchQueryAdapterItemPagedListBuilder
 import by.ve.omdbapiandroid.presentation.viewmodel.model.FilterParams
 import by.ve.omdbapiandroid.presentation.viewmodel.model.SearchQueryUpdate
-import by.ve.omdbapiandroid.presentation.lifecycle.SingleLiveEvent
 import by.ve.omdbapiandroid.repositories.model.SearchQueryDto
 import by.ve.omdbapiandroid.view.model.MovieAdapterItem
 import by.ve.omdbapiandroid.view.model.SearchQueryAdapterItem
@@ -25,21 +24,21 @@ import javax.inject.Inject
 private const val USER_INPUT_DEBOUNCE = 500L
 
 class MoviesListViewModel @Inject constructor(
-    private val moviesDataSourceFactory: MoviesDataSourceFactory,
-    recentSearchesDataSourceFactory: RecentSearchesDataSourceFactory
+    val filterViewModel: FilterViewModel,
+    private val movieAdapterItemPagedListBuilder: MovieAdapterItemPagedListBuilder,
+    searchQueryAdapterItemPagedListBuilder: SearchQueryAdapterItemPagedListBuilder
 ) : ViewModel() {
 
-    val movies: LiveData<PagedList<MovieAdapterItem>>
+    val movies: LiveData<PagedList<MovieAdapterItem>> = movieAdapterItemPagedListBuilder.build()
 
-    val searchesQuery: LiveData<PagedList<SearchQueryAdapterItem>>
+    val searchesQuery: LiveData<PagedList<SearchQueryAdapterItem>> =
+        searchQueryAdapterItemPagedListBuilder.build(::onRecentQuerySelected)
 
     val query = MutableLiveData<String>()
 
     val recentSearchesOpen = MutableLiveData<Boolean>(false)
 
     val showFilterSettings = SingleLiveEvent<Void>()
-
-    val filterViewModel = FilterViewModel()
 
     private val querySubject = PublishSubject.create<String>()
 
@@ -48,34 +47,11 @@ class MoviesListViewModel @Inject constructor(
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        compositeDisposable += moviesDataSourceFactory
-
-        val moviesListConfig = PagedList.Config.Builder()
-            .setPageSize(10)
-            .setEnablePlaceholders(true)
-            .build()
-
-        movies = LivePagedListBuilder<Int, MovieAdapterItem>(moviesDataSourceFactory.map {
-            MovieAdapterItem(
-                title = it.title,
-                year = it.year,
-                posterUrl = it.posterUrl
-            )
-        }, moviesListConfig).build()
-
-        searchesQuery = LivePagedListBuilder<Int, SearchQueryAdapterItem>(recentSearchesDataSourceFactory.map {
-            SearchQueryAdapterItem(
-                query = it.query,
-                year = it.year.toString(),
-                type = it.type.toString(),
-                onClick = { onRecentQuerySelected(it) }
-            )
-        }, 10).build()
-
         startListeningSearchQuery()
     }
 
     override fun onCleared() {
+        movieAdapterItemPagedListBuilder.dispose()
         compositeDisposable.dispose()
     }
 
@@ -120,7 +96,7 @@ class MoviesListViewModel @Inject constructor(
                     )
                 )
                 query.value = queryDto.query
-                moviesDataSourceFactory.query = queryDto
+                movieAdapterItemPagedListBuilder.updateQuery(queryDto)
             }
     }
 
