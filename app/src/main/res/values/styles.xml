@@ -8,4 +8,5 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ApplyFilterButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog"/>
 </resources>

@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="320dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing_8">
 
         <TextView
             android:id="@+id/yearSelectorCaption"
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:labelFor="@id/yearSelector"
             android:text="@string/filter_year"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,10 +39,10 @@
             android:id="@+id/typesSelector"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/yearSelector">
+            app:layout_constraintTop_toBottomOf="@id/yearSelector"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.MaterialComponents.Chip.Filter"
@@ -68,7 +70,7 @@
         </com.google.android.material.chip.ChipGroup>
 
         <Button
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            style="@style/ApplyFilterButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/apply_filter"
