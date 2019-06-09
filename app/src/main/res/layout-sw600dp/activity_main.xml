@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="searchQueriesAdapter"
+            type="by.ve.omdbapiandroid.view.SearchQueriesAdapter" />
+
+        <variable
+            name="moviesAdapter"
+            type="by.ve.omdbapiandroid.view.MoviesAdapter" />
+
+        <variable
+            name="viewModel"
+            type="by.ve.omdbapiandroid.presentation.MoviesListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top"
+                android:layout_margin="@dimen/spacing_8"
+                android:background="@drawable/bg_search_view">
+
+                <androidx.appcompat.widget.SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconifiedByDefault="false"
+                    app:onQuerySubmit="@{viewModel::onSearchQuerySubmit}"
+                    app:query="@{viewModel.query}"
+                    app:queryBackground="@null"
+                    app:queryHint="@string/search_hint"
+                    app:searchIcon="@null" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/panelsSeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <include
+            android:id="@+id/filter"
+            layout="@layout/layout_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/panelsSeparator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBar"
+            app:viewModel="@{viewModel.filterViewModel}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recentQueries"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:adapter="@{searchQueriesAdapter}"
+            app:itemSpacing="@{@dimen/spacing_8}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/panelsSeparator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter"
+            tools:listitem="@layout/item_recent_search" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:adapter="@{moviesAdapter}"
+            app:itemSpacing="@{@dimen/spacing_8}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/panelsSeparator"
+            app:layout_constraintTop_toBottomOf="@id/appBar"
+            app:spanCount="@integer/movies_list_columns_count"
+            tools:listitem="@layout/item_movie" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
