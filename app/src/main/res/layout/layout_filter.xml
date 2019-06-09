@@ -62,9 +62,9 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_episode"
-                app:checked="@{viewModel.episodeTypeSelected}"
-                app:onCheckedChanged="@{viewModel::onEpisodeCheckChanged}" />
+                android:text="@string/type_game"
+                app:checked="@{viewModel.gameTypeSelected}"
+                app:onCheckedChanged="@{viewModel::onGameCheckChanged}" />
         </com.google.android.material.chip.ChipGroup>
 
         <Button

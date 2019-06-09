@@ -22,7 +22,7 @@ class FilterViewModel {
 
     val seriesTypeSelected = MutableLiveData<Boolean>(null)
 
-    val episodeTypeSelected = MutableLiveData<Boolean>(null)
+    val gameTypeSelected = MutableLiveData<Boolean>(null)
 
     val appliedFilterParams: Observable<FilterParams>
 
@@ -44,7 +44,7 @@ class FilterViewModel {
                 selectedYearPosition.value = if (it.year == null) ANY_YEAR_INDEX else years.indexOf(it.year.toString())
                 movieTypeSelected.value = it.type == MediaContentType.MOVIE
                 seriesTypeSelected.value = it.type == MediaContentType.SERIES
-                episodeTypeSelected.value = it.type == MediaContentType.EPISODE
+                gameTypeSelected.value = it.type == MediaContentType.GAME
             }
 
         appliedFilterParams = applyFilterSubject.withLatestFrom(filterParams) { _, params ->
@@ -65,8 +65,8 @@ class FilterViewModel {
         updateSelectedType(MediaContentType.SERIES, isChecked)
     }
 
-    fun onEpisodeCheckChanged(isChecked: Boolean) {
-        updateSelectedType(MediaContentType.EPISODE, isChecked)
+    fun onGameCheckChanged(isChecked: Boolean) {
+        updateSelectedType(MediaContentType.GAME, isChecked)
     }
 
     fun onApplyFilterPressed() {

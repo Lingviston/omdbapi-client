@@ -7,6 +7,6 @@
     <string name="filter_year">Filter by year</string>
     <string name="type_series">Series</string>
     <string name="type_movie">Movie</string>
-    <string name="type_episode">Episode</string>
+    <string name="type_game">Game</string>
     <string name="apply_filter">Apply Filter</string>
 </resources>

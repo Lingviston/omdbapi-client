@@ -9,7 +9,7 @@ import io.reactivex.Single
 
 private const val TYPE_MOVIE = "movie"
 private const val TYPE_SERIES = "series"
-private const val TYPE_EPISODE = "episode"
+private const val TYPE_GAME = "game"
 
 class MoviesRepositoryImpl(
     private val searchService: SearchService,
@@ -30,7 +30,7 @@ class MoviesRepositoryImpl(
         return when (this) {
             MediaContentType.MOVIE -> TYPE_MOVIE
             MediaContentType.SERIES -> TYPE_SERIES
-            MediaContentType.EPISODE -> TYPE_EPISODE
+            MediaContentType.GAME -> TYPE_GAME
         }
     }
 }
